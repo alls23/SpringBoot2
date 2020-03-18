@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  >
+<head>
+	<title>Simple Sidebar - Start Bootstrap Template</title>
+
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<!-- Custom styles for this template -->
+	<link href="/css/simple-sidebar.css" type="text/css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<!-- Bootstrap core CSS -->
+<!--	<link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet">-->
+
+
+
+
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">Bootstrao Project</a>
+	</div>
+	<div class="collapse navbar-collapse">
+		<ul class="nav navbar-nav">
+<!--			<li><p class="active" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></p></li>-->
+			<li class="active"><a th:href="@{/login}">Login</a></li>
+			<p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+		</ul>
+	</div><!--/.nav-collapse -->
+</div><!--/.navbar -->
+
+<div class="container">
+<div class="row">
+	<div role="tabpanel">
+		<div class="col-sm-3">
+			<ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+				<li role="presentation" class="brand-nav active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Admin panel</a></li>
+				<li role="presentation" class="brand-nav"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">user</a></li>
+
+			</ul>
+		</div>
+		<div class="col-sm-9">
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="tab1">
+					<h1>Admin panel</h1>
+					<ul class="nav nav-tabs">
+						<div class="tabbable">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#tabs1" data-toggle="tab">Section admin 1</a></li>
+								<li><a href="#tabs2" data-toggle="tab">Section admin 2</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane accordion active" id="tabs1">
+								<table class="table">
+									<thead>
+									<tr>
+										<th>#</th>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>Username</th>
+										<th style="width: 36px;"></th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr th:each="user : ${userDataSets}">
+										<td th:text="${user.id}"></td>
+										<td th:text="${user.login}"></td>
+										<td th:text="${user.name}"></td>
+										<td><a th:href="@{/admin/editUser/{id}(id=${user.id})}">Edit</a></td>
+										<td><a th:href="@{/admin/deleteUser/{id}(id=${user.id})}">Delete</a></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="tab-pane" id="tabs2">
+								<p>I'm in Section admin2.</p>
+								<div class="span8">
+								</div>
+							</div>
+						</div>
+					</ul>
+				</div>
+
+				<div role="tabpanel" class="tab-pane" id="tab2">
+					<h1>USer panel</h1>
+					<ul class="nav nav-tabs">
+						<div class="tabbable">
+							<ul class="nav nav-tabs">
+								<li><a href="#tabq2" data-toggle="tab">Section User 1</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tabq2">
+									<p>I'm in Section user1.</p>
+								</div>
+							</div>
+						</div>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<!-- Menu Toggle Script -->
+<script>
+	$(document).ready(function() {
+		// language=JQuery-CSS
+		$('[data-toggle=offcanvas]').click(function() {
+			$('.row-offcanvas').toggleClass('active');
+		});
+	});
+
+</script>
+
+</body>
+
+</html>

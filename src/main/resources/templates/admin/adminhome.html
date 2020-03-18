@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<div th:switch="${userDataSets}">
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
+        <h2>Users</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Login</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userDataSets}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.login}"></td>
+                <td th:text="${user.name}"></td>
+                <td><a th:href="@{/admin/editUser/{id}(id=${user.id})}">Edit</a></td>
+                <td><a th:href="@{/admin/deleteUser/{id}(id=${user.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/admin/addUser">Add a new user</a></p>
+</div>
+</html>
